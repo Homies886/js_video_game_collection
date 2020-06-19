@@ -2,7 +2,11 @@ const endPoint = "http://localhost:3000/api/v1/games";
 
 document.addEventListener('DOMContentLoaded', () => {
   getGames()
-});
+
+  const createGameForm = document.querySelector("#create-game-form")
+
+  createGameForm.addEventListener("submit", (e) => createFormHandler(e))
+})
 
 function getGames() {
   fetch(endPoint)
