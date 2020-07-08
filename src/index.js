@@ -9,12 +9,17 @@ document.addEventListener('DOMContentLoaded', () => {
   createGameForm.addEventListener("submit", (e) => createFormHandler(e))
 
   const gameContainer = document.querySelector('#game-container')
+
   gameContainer.addEventListener('click', e => {
     const id = parseInt(e.target.dataset.id);
     const game = Game.findById(id);
     game.removeGameCard(id);
     deleteGame(game)
   })
+
+  const gameSort = document.querySelector('button#sort-button')
+
+  gameSort.addEventListener("click", (e) => sortGameList(e))
 })
 
 function getGames() {
@@ -65,5 +70,27 @@ function deleteGame(info) {
     method: "DELETE",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(gameInfo)
+  })
+}
+
+function sortGameList() {
+  let container = document.querySelector('#game-container')
+
+  container.innerHTML = ""
+
+  let sortedList = Game.all.sort((a, b) => {
+    let titleA = a.title.toUpperCase()
+    let titleB = b.title.toUpperCase()
+    if (titleA < titleB) {
+      return -1;
+    }
+    if (titleA > titleB) {
+      return 1;
+    }
+    return 0;
+  })
+
+  sortedList.forEach(game => {
+    container.innerHTML += game.renderGameCard()
   })
 }

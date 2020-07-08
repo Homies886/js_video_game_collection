@@ -25,6 +25,22 @@ class Game {
     el.remove()
   }
 
+  // sortGameList() {
+    
+  //   let sortedList = Game.all.sort((a, b) => {
+  //     var titleA = a.title.toUpperCase()
+  //     var titleB = b.title.toUpperCase()
+  //     if (titleA < titleB) {
+  //       return -1;
+  //     }
+  //     if (itleA > titleB) {
+  //       return 1;
+  //     }
+  //     return 0;
+  //   })
+  //   renderGameCard()
+  // }
+
   static findById(id) {
     return this.all.find(game => game.id === id.toString());
   }
